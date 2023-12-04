@@ -1,19 +1,27 @@
-export const MovieCard = () => {
+import './MovieCard.css';
+
+export const MovieCard = ({movie}) => {
+
+    const {name, imdb_rating, genre, duration, img_link} = movie;
+    
     return (
         <div className="card-container">
             <div className="card-img-container">
-                <img src="https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_QL75_UX380_CR0" alt="movie-card" />
+                <img className='card-img' src={img_link} alt="movie-card" />
             </div>
-            <div>
-                <span className="title">Fast & Furious</span>
+            <div className="card-details">
+                <div>
+                    <span className="title">{name}</span>
+                </div>
+                <div>
+                    <span className="genre">Genre: {genre}</span>
+                </div>
+                <div className="ratings">
+                    <span>Ratin: {imdb_rating}</span>
+                    <span>Duration: {duration} min</span>
+                </div>
             </div>
-            <div>
-                <span className="genre">Genre: Action</span>
-            </div>
-            <div className="ratings">
-                <span>Ratin: 4.5</span>
-                <span>Duration: 148 min</span>
-            </div>
+
         </div>
     )
 }
