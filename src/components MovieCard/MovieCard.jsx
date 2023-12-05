@@ -1,7 +1,7 @@
 import './MovieCard.css';
 
 export const MovieCard = ({movie}) => {
-
+    
     const {name, imdb_rating, genre, duration, img_link} = movie;
     
     return (
@@ -17,7 +17,7 @@ export const MovieCard = ({movie}) => {
                     <span className="genre">Genre: {genre}</span>
                 </div>
                 <div className="ratings">
-                    <span>Ratin: {imdb_rating}</span>
+                    <span>Rating: {imdb_rating}</span>
                     <span>Duration: {duration} min</span>
                 </div>
             </div>
