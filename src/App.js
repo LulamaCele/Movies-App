@@ -1,49 +1,40 @@
-import './App.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { MovieCard } from './components MovieCard/MovieCard';
-import { SearchBox } from './components MovieCard/SearchBox';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Home } from "./components MovieCard/Home";
+import { MoviePage } from "./components MovieCard/MoviePage";
 
 function App() {
-
   const [movies, setMovies] = useState([]);
-  const [searchText, setSearchText] = useState('');
 
   const getMovies = async () => {
     try {
-      const { data } = await axios.get("https://movies-app.prakashsakari.repl.co/api/movies");
+      const { data } = await axios.get(
+        "https://movies-app.prakashsakari.repl.co/api/movies"
+      );
+      console.log(data);
       setMovies(data);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
-    getMovies()
-  }, [])
+    getMovies();
+  }, []);
 
   return (
-    <div className="App">
-      <div className='header'>
-        <h1 className='heading-1'>Movies</h1>
-        <form>
-          <input onChange={(e) => setSearchText(e.target.value)}
-            type="text"
-            placeholder='Search movie title'
-            value={searchText} />
-        </form>
-      </div>
-
-      <main>
-        {movies.filter((movie) => {
-          return searchText.toLowerCase() === ''
-            ? movie
-            : movie.name.toLowerCase().includes(searchText);
-        })
-          .map(movie => <MovieCard key={movie.id} movie={movie} />)}
-      </main>
-
-    </div>
+    <>
+      <Routes>
+        <Route exact path="/" element={<Home movies={movies} />} />
+        {/* <Route path='/movie-page/' element={<MoviePage />} /> */}
+        <Route
+          path="/movie-page/:name"
+          element={<MoviePage movies={movies} />}
+        />
+      </Routes>
+    </>
   );
 }
 
